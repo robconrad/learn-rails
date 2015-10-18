@@ -38,3 +38,4 @@ bower.json
 spring/
 
 .idea
+.DS_Store
