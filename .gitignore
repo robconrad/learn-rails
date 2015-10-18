@@ -34,4 +34,7 @@ bower.json
 # Ignore pow environment settings
 .powenv
 
+# exclude spring temp files
+spring/
+
 .idea
