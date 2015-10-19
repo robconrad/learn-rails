@@ -10,4 +10,6 @@ class User < ActiveRecord::Base
             length: { maximum: 255 },
             format: { with: VALID_EMAIL_REGEX }
 
+  before_save { self.email = email.downcase }
+
 end
