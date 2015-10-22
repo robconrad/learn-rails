@@ -1,6 +1,6 @@
 
 class User < ActiveRecord::Base
-  attr_accessor :remember_token
+  attr_accessor :remember_token, :activation_token
 
   validates :name,  presence: true, length: { maximum: 50 }
 
@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
 
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  before_save { self.email.downcase! }
+  before_save :downcase_email
+  before_create :create_activation_digest
 
   has_secure_password
 
@@ -44,6 +45,15 @@ class User < ActiveRecord::Base
   # Forgets a user.
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def downcase_email
+    self.email.downcase!
+  end
+
+  def create_activation_digest
+    self.activation_token = User.new_token
+    self.activation_digest = User.digest(activation_token)
   end
 
 end
