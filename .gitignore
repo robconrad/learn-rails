@@ -39,3 +39,6 @@ spring/
 
 .idea
 .DS_Store
+
+# Ignore uploaded test images.
+/public/uploads
